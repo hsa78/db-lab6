@@ -9,6 +9,8 @@ import GenreModule from './genre/genre.module';
 import BookEntity from './db/book.entity';
 import GenreEntity from './db/genre.entity';
 
+
+
 @Module({
   imports: [UserModule ,
             BooksModule,
@@ -18,15 +20,16 @@ import GenreEntity from './db/genre.entity';
         ),
 
         TypeOrmModule.forRoot({
-          type: "sqlite",
-          database: "./database.sqlite",
-          synchronize: true,
+          type: "postgres",     
+          host: "localhost",     
+          port: 5432,     
+          username: "postgres",
+          password: "hena1378",     
+          database: "bookstore",     
           entities: [
             "dist/db/**/*.js"
-          ],
-          cli: {
-            "entitiesDir": "src/db"
-          }
+          ],     
+          synchronize: true 
         }),
   ],
   controllers: [AppController],
