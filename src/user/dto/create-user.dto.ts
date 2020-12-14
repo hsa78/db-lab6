@@ -6,5 +6,9 @@ export default class CreateUserDto {
     @IsNotEmpty()
     readonly name: string;
 
-    readonly books: number[] ;
+    readonly books: number[];
+
+    @ApiProperty({description:'password of user '})
+    @IsNotEmpty()
+    readonly password: string;
 }
