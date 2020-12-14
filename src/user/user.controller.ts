@@ -2,6 +2,7 @@ import { Body, Controller, Get, ParseIntPipe, Post, Put, Header } from '@nestjs/
 import { UserServices } from './user.service';
 import CreateUserDto from './dto/create-user.dto';
 import {ApiResponse,ApiBearerAuth, ApiQuery } from '@nestjs/swagger';
+import { Public } from 'src/auth/public';
 
 @Controller('users')
 export class UserController {
@@ -11,6 +12,7 @@ export class UserController {
   @Post('post')
   @ApiResponse({ status:200, description:'create new user' }) 
   @Header('Content-Type', 'application/json') 
+  @Public()
   postUser( @Body() user: CreateUserDto) {
     return this.usersServices.insert(user);
   }
