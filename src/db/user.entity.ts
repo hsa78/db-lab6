@@ -1,12 +1,12 @@
-import { Entity, PrimaryGeneratedColumn, Column, BaseEntity, OneToMany } from 'typeorm';
-import BookEntity from './book.entity';
+import { Entity, PrimaryColumn, Column, BaseEntity, OneToMany } from 'typeorm';
+import TodoEntity from './todo.entity';
 @Entity()
 export default class UserEntity extends BaseEntity {
-    @OneToMany( type => BookEntity , book => book.user)
-    books: BookEntity[];
+    @OneToMany( type => TodoEntity , todo => todo.user)
+    todos: TodoEntity[];
 
-    @PrimaryGeneratedColumn()
-    id: number;
+    @PrimaryColumn()
+    email: string;
 
     @Column({ length: 500 })
     name: string;
