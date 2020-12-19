@@ -156,9 +156,9 @@ export class TodoService {
         return item;
     }
 
-    //   async getAllUsers(): Promise<UserEntity[]> {
-    //     return await UserEntity.find();
-    //   }
+      async getAllTasks(): Promise<TaskEntity[]> {
+        return await TaskEntity.find();
+      }
     //   async getBooksOfUser(userID: number): Promise<BookEntity[]> {
     //     console.log(typeof(userID));
     //     const user: UserEntity = await UserEntity.findOne({where: {id: userID}, relations: ['books']});

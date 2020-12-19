@@ -1,4 +1,4 @@
-import { Controller, Post, Header, Body, Delete, Put } from '@nestjs/common';
+import { Controller, Post, Header, Body, Delete, Put, Get } from '@nestjs/common';
 import { TodoService } from './todo.service';
 import { ApiResponse } from '@nestjs/swagger';
 import { Public } from 'src/auth/public';
@@ -61,23 +61,9 @@ export class TodoController {
     return this.todoService.updateItem(itemDetail);
   }
 
-// // 'getAll()' returns the list of all the existing users in the database
-//   @Get()
-//   @ApiResponse({ status:200, description:'show all users' }) 
-//   getAll() {
-//     return this.usersServices.getAllUsers();
-//   }
-
-// //'getBooks()' return all the books which are associated with the user 
-// // provided through 'userID' by the request  
-//   @Get('books')
-//   @ApiResponse({ status:200, description:'return all the books which are associated with the user' }) 
-//   @ApiQuery({
-//     name:'userID', 
-//     required:true, 
-//     type:Number, 
-//   })  
-//   getBooks( @Body('userID', ParseIntPipe) userID: number ) {
-//     return this.usersServices.getBooksOfUser(userID);
-//   }
+  @Get('task')
+  @ApiResponse({ status:200, description:'show all tasks' }) 
+  getAll() {
+    return this.todoService.getAllTasks();
+  }
 }
