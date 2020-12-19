@@ -15,7 +15,6 @@ export class TodoController {
   @Post('task/insert')
   @ApiResponse({ status:200, description:'create new task' }) 
   @Header('Content-Type', 'application/json') 
-  @Public()
   postTask( @Body() task: CreateTaskDto) {
     return this.todoService.insertTask(task);
   }
@@ -23,7 +22,6 @@ export class TodoController {
   @Post('category/insert')
   @ApiResponse({ status:200, description:'create new category' }) 
   @Header('Content-Type', 'application/json') 
-  @Public()
   postCategory( @Body() category: CreateCategoryDto) {
     return this.todoService.insertCategory(category);
   }
@@ -31,7 +29,6 @@ export class TodoController {
   @Post('tag/insert')
   @ApiResponse({ status:200, description:'create new tag' }) 
   @Header('Content-Type', 'application/json') 
-  @Public()
   postTag( @Body() tag: CreateTagDto) {
     return this.todoService.insertTag(tag);
   }
@@ -39,7 +36,6 @@ export class TodoController {
   @Delete('task/delete')
   @ApiResponse({ status:200, description:'delete existing task' }) 
   @Header('Content-Type', 'application/json') 
-  @Public()
   deleteTask( @Body() detail: {taskId: number}) {
     return this.todoService.deleteTask(detail.taskId);
   }
@@ -47,7 +43,6 @@ export class TodoController {
   @Delete('item/delete')
   @ApiResponse({ status:200, description:'delete existing item' }) 
   @Header('Content-Type', 'application/json') 
-  @Public()
   deleteItem( @Body() detail: {itemId: number}) {
     return this.todoService.deleteItem(detail.itemId);
   }
@@ -55,7 +50,6 @@ export class TodoController {
   @Put('task/update')
   @ApiResponse({ status:200, description:'update existing task' }) 
   @Header('Content-Type', 'application/json') 
-  @Public()
     async updateTask(@Body() taskDetail: UpdateTaskDto) {
     return this.todoService.updateTask(taskDetail);
   }
@@ -63,7 +57,6 @@ export class TodoController {
   @Put('item/update')
   @ApiResponse({ status:200, description:'update existing item' }) 
   @Header('Content-Type', 'application/json') 
-  @Public()
     async updateItem(@Body() itemDetail: UpdateItemDto) {
     return this.todoService.updateItem(itemDetail);
   }
