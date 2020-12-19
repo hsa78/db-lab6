@@ -7,13 +7,18 @@ import { AuthModule } from './auth/auth.module';
 import UserEntity from './db/user.entity';
 import { AuthService } from './auth/auth.service';
 import { JwtService, JwtModule } from '@nestjs/jwt';
+import { TodoModule } from './todo/todo.module';
+import TaskEntity from './db/task.entity';
+import ItemEntity from './db/item.entity';
+import TagEntity from './db/tag.entity';
+import CategoryEntity from './db/category.entity';
 
 
 
 @Module({
   imports: [UserModule ,
         TypeOrmModule.forFeature(
-        [UserEntity],
+        [UserEntity, TaskEntity, ItemEntity, TagEntity, CategoryEntity],
         ),
 
         TypeOrmModule.forRoot({
@@ -30,6 +35,8 @@ import { JwtService, JwtModule } from '@nestjs/jwt';
         }),
 
         AuthModule,
+
+        TodoModule,
   ],
   controllers: [AppController],
   providers: [AppService],
