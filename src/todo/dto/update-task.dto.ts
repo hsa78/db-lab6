@@ -1,6 +1,7 @@
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger'; 
 import { IsNotEmpty } from "class-validator";
 import UpdateItemDto from './update-item.dto';
+import CreateItemDto from './create-item.dto';
 
 export default class UpdateTaskDto {
     @ApiProperty({description:'title of task'})
@@ -14,6 +15,9 @@ export default class UpdateTaskDto {
 
     @ApiProperty({description:'items'})
     readonly items: UpdateItemDto[];
+
+    @ApiProperty({description:'newItems'})
+    readonly newItems: CreateItemDto[];
 
     @ApiProperty({description:'compeleted status'})
     readonly compeleted: boolean;

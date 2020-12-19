@@ -1,10 +1,12 @@
-import { Controller, Post, Header, Body, Delete } from '@nestjs/common';
+import { Controller, Post, Header, Body, Delete, Put } from '@nestjs/common';
 import { TodoService } from './todo.service';
 import { ApiResponse } from '@nestjs/swagger';
 import { Public } from 'src/auth/public';
 import CreateTaskDto from './dto/create-task.dto';
 import CreateCategoryDto from './dto/create-category.dto';
 import CreateTagDto from './dto/create-tag.dto';
+import UpdateTaskDto from './dto/update-task.dto';
+import UpdateItemDto from './dto/update-item.dto';
 
 @Controller('todo')
 export class TodoController {
@@ -49,6 +51,23 @@ export class TodoController {
   deleteItem( @Body() detail: {itemId: number}) {
     return this.todoService.deleteItem(detail.itemId);
   }
+
+  @Put('task/update')
+  @ApiResponse({ status:200, description:'update existing task' }) 
+  @Header('Content-Type', 'application/json') 
+  @Public()
+    async updateTask(@Body() taskDetail: UpdateTaskDto) {
+    return this.todoService.updateTask(taskDetail);
+  }
+
+  @Put('item/update')
+  @ApiResponse({ status:200, description:'update existing item' }) 
+  @Header('Content-Type', 'application/json') 
+  @Public()
+    async updateItem(@Body() itemDetail: UpdateItemDto) {
+    return this.todoService.updateItem(itemDetail);
+  }
+
 // // 'getAll()' returns the list of all the existing users in the database
 //   @Get()
 //   @ApiResponse({ status:200, description:'show all users' }) 

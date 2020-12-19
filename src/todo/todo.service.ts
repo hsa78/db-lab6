@@ -25,15 +25,14 @@ export class TodoService {
             throw new NotFoundException();
         taskEntity.category = category;
 
+        taskEntity.tags = []; 
         if(userDetails.tagIds){
-            let tags: TagEntity[]; 
             userDetails.tagIds.forEach(async tagId => {
                 let tag = await TagEntity.findOne(tagId);
                 if(isNullOrUndefined(tag))
                     throw new NotFoundException();
-                tags.push(tag);
+                taskEntity.tags.push(tag);
             });
-            taskEntity.tags = tags;
         }
 
         
@@ -105,7 +104,57 @@ export class TodoService {
         return task;
     }
 
+    async updateTask(taskDetails: UpdateTaskDto): Promise<TaskEntity>{
+        let task = await TaskEntity.findOne({where:{id: taskDetails.id}});
+        if(isNullOrUndefined(task))
+            throw new NotFoundException();
+        if(taskDetails.title){
+            task.title = taskDetails.title;
+        }
+        if(taskDetails.compeleted){
+            task.compeleted = taskDetails.compeleted;
+        }
+        if(taskDetails.categoryId){
+            let newCategory = await CategoryEntity.findOne(taskDetails.categoryId);
+            task.category = newCategory;
+        }
+        // if(taskDetails.tagIds){ //TODO this part is not working
+        //     task.tags = [];
+        //     taskDetails.tagIds.forEach(async tagId => {
+        //         let newTag = await TagEntity.findOne(tagId);
+        //         task.tags.push(newTag);
+        //     });
+        // }
+        if(taskDetails.items){
+            taskDetails.items.forEach(async item => {
+                this.updateItem(item);
+            });
+        }
+        if(taskDetails.newItems){
+            taskDetails.newItems.forEach(async item => {
+                this.insertItem(item, task);
+            });
+        }
+        TaskEntity.update(taskDetails.id, task);
+        return task;
+    }
 
+    async updateItem(itemDetails: UpdateItemDto): Promise<ItemEntity>{
+        let item = ItemEntity.findOne({where:{id: itemDetails.id}});
+        if(isNullOrUndefined(item))
+            throw new NotFoundException();
+        if(itemDetails.title){
+            (await item).title = itemDetails.title;
+        }
+        if(itemDetails.desc){
+            (await item).desc = itemDetails.desc;
+        }
+        if(itemDetails.compeleted){
+            (await item).compeleted = itemDetails.compeleted;
+        }
+        ItemEntity.update(itemDetails.id, await item);
+        return item;
+    }
 
     //   async getAllUsers(): Promise<UserEntity[]> {
     //     return await UserEntity.find();
