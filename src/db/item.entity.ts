@@ -1,5 +1,6 @@
 import { Entity, PrimaryGeneratedColumn, Column, BaseEntity, ManyToOne, ManyToMany } from 'typeorm';
 import TaskEntity from './task.entity';
+import { Optional } from '@nestjs/common';
 
 @Entity()
 export default class ItemEntity extends BaseEntity {
@@ -10,12 +11,12 @@ export default class ItemEntity extends BaseEntity {
   @Column()
   title: string;
 
-  @Column({length:500})
+  @Column({ nullable: true })
   desc: string;
 
   @Column()
   compeleted: boolean;
 
-  @ManyToOne(type => TaskEntity, task => task.items)
+  @ManyToOne(type => TaskEntity, task => task.items, {onDelete: "CASCADE"})
   task: TaskEntity;
 }

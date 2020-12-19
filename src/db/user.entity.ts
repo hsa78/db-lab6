@@ -1,9 +1,10 @@
 import { Entity, PrimaryColumn, Column, BaseEntity, OneToMany } from 'typeorm';
-import TodoEntity from './todo.entity';
+import TaskEntity from './task.entity';
+
 @Entity()
 export default class UserEntity extends BaseEntity {
-    @OneToMany( type => TodoEntity , todo => todo.user)
-    todos: TodoEntity[];
+    @OneToMany( type => TaskEntity , task => task.user)
+    tasks: TaskEntity[];
 
     @PrimaryColumn()
     email: string;
