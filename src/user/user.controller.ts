@@ -25,14 +25,14 @@ export class UserController {
 
 //'getBooks()' return all the books which are associated with the user 
 // provided through 'userID' by the request  
-  @Get('books')
-  @ApiResponse({ status:200, description:'return all the books which are associated with the user' }) 
-  @ApiQuery({
-    name:'userID', 
-    required:true, 
-    type:Number, 
-  })  
-  getBooks( @Body('userID', ParseIntPipe) userID: number ) {
-    return this.usersServices.getBooksOfUser(userID);
-  }
+  // @Get('books')
+  // @ApiResponse({ status:200, description:'return all the books which are associated with the user' }) 
+  // @ApiQuery({
+  //   name:'userID', 
+  //   required:true, 
+  //   type:Number, 
+  // })  
+  // getBooks( @Body('userID', ParseIntPipe) userID: number ) {
+  //   return this.usersServices.getBooksOfUser(userID);
+  // }
 }
